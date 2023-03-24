@@ -1,33 +1,51 @@
-import { Mask, RULES, Validation } from "./rules";
+import Mask from "./mask";
+import RULES from "./rules";
 import { getFormDataObject } from "./util";
+import Validation from "./validation";
 
 const Form = (formSelector, onSubmit, language) => {
     const ERROR = require(`./i18n/error/${language}.json`)
     const errorsActives = {};
 
     function getTranslatedError(error) {
-        const errorPath = error.split('.')
-        let textVessel = ERROR[errorPath[0]];
+        if(error) {
+            const errorPath = error.split('.')
+            let textVessel = ERROR[errorPath[0]];
 
-        if(errorPath.length > 1) {
-            errorPath.shift();
-            errorPath.forEach(element => {
-                textVessel = textVessel[element];
-            });
+            if(errorPath.length > 1) {
+                errorPath.shift();
+                errorPath.forEach(element => {
+                    textVessel = textVessel[element];
+                });
+            }
+            return textVessel;
         }
-        return textVessel;
+        return '';
     }
 
     function toggleErrorMessage(input, rule, error, isValid) {
         if(!isValid || errorsActives[rule]) {
             const errorElement = input.parentElement.querySelector('.rule__error');
             if(errorElement) {
-                const translatedError = getTranslatedError(error);
                 errorElement.classList[isValid ? 'remove' : 'add']('invalid');
-                errorElement.innerText = isValid ? '' : translatedError;
+                errorElement.innerText = getTranslatedError(error);
             }
         }
         errorsActives[rule] = !isValid;
+    }
+
+    function inputValidation(input) {
+        if(input.dataset.rule) {
+            const INPUT_RULE = input.dataset.rule.split('--')[0];
+            const RULE_MODIFIER = input.dataset.rule.split('--').length > 1 ? input.dataset.rule.split('--')[1] : ''
+            const validate = Validation(input.value, RULES[INPUT_RULE], RULE_MODIFIER);
+            const {isValid, error} = validate.validate();
+            input.classList[isValid ? 'remove' : 'add']('rule--invalid');
+
+            toggleErrorMessage(input, INPUT_RULE+RULE_MODIFIER, error, isValid)
+            return isValid;
+        }
+        return true;
     }
 
     function initMask() {
@@ -35,30 +53,16 @@ const Form = (formSelector, onSubmit, language) => {
     }
 
     function initValidation() {
-        const form = document.querySelector(formSelector);
-        form.addEventListener('submit', function(e) {
+        const formElement = document.querySelector(formSelector);
+        const formFieldsElement = formElement.querySelectorAll('input');
+        formElement.addEventListener('submit', function(e) {
             e.preventDefault();
-
-            let formValidate = [];
             const data = getFormDataObject(this);
-
-            this.querySelectorAll('input').forEach((input) => {
-                if(input.dataset.rule) {
-                    const INPUT_RULE = input.dataset.rule.split('--')[0];
-                    const RULE_MODIFIER = input.dataset.rule.split('--').length > 1 ? input.dataset.rule.split('--')[1] : ''
-                    const validate = Validation(input.value, RULES[INPUT_RULE], RULE_MODIFIER);
-                    const {isValid, error} = validate.validate();
-
-                    formValidate.push(isValid);
-                    input.classList[isValid ? 'remove' : 'add']('rule--invalid');
-
-                    toggleErrorMessage(input, INPUT_RULE+RULE_MODIFIER, error, isValid)
-                }
-            });
-
-            if(!formValidate.some((element) => !element)) {
-                onSubmit(data);
+            if(formFieldsElement) {
+                const formValidators = [...formFieldsElement].map((input) => inputValidation(input));
+                if(formValidators.some((element) => !element)) return;
             }
+            onSubmit(data);
         });
     }
 
