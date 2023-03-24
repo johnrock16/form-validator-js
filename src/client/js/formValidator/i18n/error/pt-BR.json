@@ -1,0 +1,26 @@
+{
+    "common": {
+        "hasText": "Por favor, preencha o campo",
+        "dateFormat": "Por favor, preencha o campo com um formato de data válida"
+    },
+    "email": {
+        "regex": "Por favor, preencha o campo com um formato de email válido"
+    },
+    "phone": {
+        "regex": "Por favor, preencha o campo com um formato de telefone válido"
+    },
+    "dd": {
+        "regex": "Por favor, preencha o campo com um formato de DD válido"
+    },
+    "date": {
+        "validDate": "Data invalida, por favor selecione uma data existente",
+        "modifier": {
+            "age": {
+                "validateAge": "Idade invalida, apenas aceitamos idades maiores ou iguais a 18 anos"
+            }
+        }
+    },
+    "cpf": {
+        "cpf": "Por favor, utilize um CPF válido"
+    }
+}

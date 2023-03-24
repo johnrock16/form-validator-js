@@ -1,15 +1,30 @@
 import { Mask, RULES, Validation } from "./rules";
 import { getFormDataObject } from "./util";
 
-const Form = (formSelector, onSubmit) => {
+const Form = (formSelector, onSubmit, language) => {
+    const ERROR = require(`./i18n/error/${language}.json`)
     const errorsActives = {};
+
+    function getTranslatedError(error) {
+        const errorPath = error.split('.')
+        let textVessel = ERROR[errorPath[0]];
+
+        if(errorPath.length > 1) {
+            errorPath.shift();
+            errorPath.forEach(element => {
+                textVessel = textVessel[element];
+            });
+        }
+        return textVessel;
+    }
 
     function toggleErrorMessage(input, rule, error, isValid) {
         if(!isValid || errorsActives[rule]) {
             const errorElement = input.parentElement.querySelector('.rule__error');
             if(errorElement) {
+                const translatedError = getTranslatedError(error);
                 errorElement.classList[isValid ? 'remove' : 'add']('invalid');
-                errorElement.innerText = isValid ? '' : error;
+                errorElement.innerText = isValid ? '' : translatedError;
             }
         }
         errorsActives[rule] = !isValid;

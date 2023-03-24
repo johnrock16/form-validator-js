@@ -4,14 +4,14 @@ export const RULES = {
     name:{
         validate: ['hasText'],
         error: {
-            hasText: 'Please, fill the field',
+            hasText: 'common.hasText',
         }
     },
     email:{
         regex:/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i,
         validate: ['regex'],
         error: {
-            regex: 'Please, fill with a valid email format',
+            regex: 'email.regex',
         }
     },
     phone:{
@@ -19,7 +19,7 @@ export const RULES = {
         mask:[[/\D/g, ''],[/(\d{4})(\d)/, '$1-$2']],
         validate: ['regex'],
         error: {
-            regex: 'Please, fill with a valid phone format',
+            regex: 'phone.regex',
         }
     },
     dd:{
@@ -27,7 +27,7 @@ export const RULES = {
         mask:[[/\D/g, ''],[/(\d{2})(\d)/, '$1']],
         validate: ['regex'],
         error: {
-            regex: 'Please, fill with a valid dd format',
+            regex: 'dd.regex',
         }
     },
     date:{
@@ -35,16 +35,16 @@ export const RULES = {
         mask:[[/\D/g, ''],[/(\d{2})(\d)/, '$1/$2'],[/(\d{2})(\d)/, '$1/$2'],[/(\d{4})(\d)/, '$1']],
         validate: ['regex', 'validDate'],
         error: {
-            regex: 'Please, fill with a valid date format',
-            validDate: 'Invalid date, please select a valid date'
+            regex: 'common.dateFormat',
+            validDate: 'date.validDate'
         },
         modifier: {
             age: {
                 validate: ['regex', 'validateAge'],
                 params: [18, 130],
                 error: {
-                    regex: 'Please, fill with a valid date format',
-                    validateAge: 'Invalid age, we only accept people with 18 years or more'
+                    regex: 'common.dateFormat',
+                    validateAge: 'date.modifier.age.validateAge'
                 }
             }
         }
@@ -53,7 +53,7 @@ export const RULES = {
         mask:[[/\D/g, ''],[/(\d{3})(\d)/, '$1.$2'],[/(\d{3})(\d)/, '$1.$2'],[/(\d{3})(\d{1,2})/, '$1-$2'],[/(-\d{2})\d+?$/, '$1']],
         validate: ['cpf'],
         error: {
-            cpf: 'Please, fill with a valid cpf',
+            cpf: 'cpf.cpf',
         },
     }
 }

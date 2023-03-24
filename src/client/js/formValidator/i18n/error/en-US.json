@@ -1,0 +1,26 @@
+{
+    "common": {
+        "hasText": "Please, fill the field",
+        "dateFormat": "Please, fill with a valid date format"
+    },
+    "email": {
+        "regex": "Please, fill with a valid email format"
+    },
+    "phone": {
+        "regex": "Please, fill with a valid phone format"
+    },
+    "dd": {
+        "regex": "Please, fill with a valid dd format"
+    },
+    "date": {
+        "validDate": "Invalid date, please select a valid date",
+        "modifier": {
+            "age": {
+                "validateAge": "Invalid age, we only accept people with 18 years or more"
+            }
+        }
+    },
+    "cpf": {
+        "cpf": "Please, fill with a valid CPF"
+    }
+}
