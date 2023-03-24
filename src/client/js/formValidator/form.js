@@ -6,6 +6,9 @@ import Validation from "./validation";
 const Form = (formSelector, onSubmit, language) => {
     const ERROR = require(`./i18n/error/${language}.json`)
     const errorsActives = {};
+    let state = {
+        onceError: false
+    }
 
     function getTranslatedError(error) {
         if(error) {
@@ -55,12 +58,22 @@ const Form = (formSelector, onSubmit, language) => {
     function initValidation() {
         const formElement = document.querySelector(formSelector);
         const formFieldsElement = formElement.querySelectorAll('input');
+        formFieldsElement.forEach((input)=>{
+            input.addEventListener('change', function(e) {
+                if(state.onceError) {
+                    inputValidation(input);
+                }
+            });
+        })
         formElement.addEventListener('submit', function(e) {
             e.preventDefault();
             const data = getFormDataObject(this);
             if(formFieldsElement) {
                 const formValidators = [...formFieldsElement].map((input) => inputValidation(input));
-                if(formValidators.some((element) => !element)) return;
+                if(formValidators.some((element) => !element)){
+                    state.onceError = true;
+                    return;
+                };
             }
             onSubmit(data);
         });
