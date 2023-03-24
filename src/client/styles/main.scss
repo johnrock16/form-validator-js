@@ -1,0 +1,14 @@
+.rule {
+    &--invalid {
+        border: 1px solid red;
+    }
+
+    &__error {
+        display: none;
+
+        &.invalid {
+            display: block;
+            color: red;
+        }
+    }
+}

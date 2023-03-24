@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body>
+    <form>
+        <div>
+            <label>name</label>
+            <input name="name" type="text" data-rule="name"/>
+            <span class="rule__error"></span>
+        </div>
+        <div>
+            <label>email</label>
+            <input name="email" type="email" data-rule="email"/>
+            <span class="rule__error"></span>
+        </div>
+        <div>
+            <label>phone</label>
+            <input class="mask-phone" name="phone" type="phone" data-rule="phone"/>
+            <span class="rule__error"></span>
+        </div>
+        <div>
+            <label>DD</label>
+            <input class="mask-dd" name="dd" type="number" data-rule="dd"/>
+            <span class="rule__error"></span>
+        </div>
+        <div>
+            <label>some data</label>
+            <input name="somedate" type="text"/>
+        </div>
+        <div>
+            <label>date</label>
+            <input name="date" type="date" data-rule="date"/>
+            <span class="rule__error"></span>
+        </div>
+        <div>
+            <label>birthdate</label>
+            <input name="birthdate" type="date" data-rule="date--age"/>
+            <span class="rule__error"></span>
+        </div>
+        <div>
+            <label>cpf</label>
+            <input class="mask-cpf" name="cpf" type="text" data-rule="cpf"/>
+            <span class="rule__error"></span>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+    <!-- <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js');
+            });
+        }
+    </script> -->
+</body>
+</html>
