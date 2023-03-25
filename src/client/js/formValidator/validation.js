@@ -2,7 +2,7 @@ import { calculateAge, isValidDate, validateCPF } from "./util";
 
 const Validation = (value, rule, modifier = null) => {
     function regex() {
-        return rule.regex.test(value);
+        return (rule.modifier && rule.modifier[modifier]?.regex) ? rule.modifier[modifier].regex.test(value) : rule.regex.test(value);
     }
 
     function hasText() {
@@ -24,7 +24,7 @@ const Validation = (value, rule, modifier = null) => {
     function validateRules(rule) {
         let error;
         const isValid = !rule.validate.some((validation) => {
-            const isInvalid = (rule.params && rule.params.length > 0) ? !this[validation](...rule.params) : !this[validation]();
+            const isInvalid = (rule.params && rule.params[validation] && rule.params[validation].length > 0) ? !this[validation](...rule.params[validation]) : !this[validation]();
             if(isInvalid && !error && rule?.error[validation]) error = rule.error[validation];
             return isInvalid;
         });

@@ -39,7 +39,9 @@ const RULES = {
         modifier: {
             age: {
                 validate: ['regex', 'validateAge'],
-                params: [18, 130],
+                params: {
+                    validateAge: [18, 130]
+                },
                 error: {
                     regex: 'common.dateFormat',
                     validateAge: 'date.modifier.age.validateAge'
