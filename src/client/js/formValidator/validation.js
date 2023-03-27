@@ -1,16 +1,12 @@
-import { calculateAge, isValidDate, validateCPF } from "./util";
+import { calculateAge, isValidDate } from "./util";
 
-const Validation = (value, rule, modifier = null) => {
+const Validation = (value, rule, modifier = null, CustomValidation = null) => {
     function regex() {
         return (rule.modifier && rule.modifier[modifier]?.regex) ? rule.modifier[modifier].regex.test(value) : rule.regex.test(value);
     }
 
     function hasText() {
         return value.replace(/\s/g, '').length > 0;
-    }
-
-    function cpf() {
-        return validateCPF(value);
     }
 
     function validDate() {
@@ -33,13 +29,20 @@ const Validation = (value, rule, modifier = null) => {
     }
 
     function validate() {
+        if(CustomValidation && typeof CustomValidation === 'function') {
+            const customValidation = CustomValidation(value);
+            Object.keys(customValidation).forEach((key) => {
+                this[key] = customValidation[key];
+            });
+        }
+
         return modifier ? validateRules.call(this, rule.modifier[modifier]) : validateRules.call(this, rule);
     }
+
 
     return ({
         regex: regex,
         hasText: hasText,
-        cpf: cpf,
         validDate: validDate,
         validateAge: validateAge,
         validate: validate
