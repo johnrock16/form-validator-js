@@ -38,3 +38,9 @@
         }
     }
 }
+
+.title {
+    &--page {
+        margin-top: $gutter * 4;
+    }
+}

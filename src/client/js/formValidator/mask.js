@@ -1,6 +1,4 @@
-import RULES from "./rules";
-
-const Mask = () => {
+const Mask = (RULES) => {
     function generateMask(value, maskArray) {
         let textMasked = value;
         maskArray.forEach((mask) => {

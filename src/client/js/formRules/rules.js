@@ -1,4 +1,4 @@
-const RULES = {
+export const CUSTOM_RULE =  {
     name:{
         validate: ['hasText'],
         attributes: {
@@ -7,14 +7,6 @@ const RULES = {
         error: {
             hasText: 'common.hasText',
         },
-        modifier: {
-            name8: {
-                validate: ['hasText'],
-                attributes: {
-                    maxLength: 8,
-                },
-            }
-        }
     },
     email:{
         regex:/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i,
@@ -79,6 +71,4 @@ const RULES = {
             cpf: 'cpf.cpf',
         },
     }
-}
-
-export default RULES;
+};

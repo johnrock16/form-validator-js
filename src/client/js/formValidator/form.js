@@ -1,10 +1,9 @@
 import Mask from "./mask";
-import RULES from "./rules";
-import { getFormDataObject } from "./util";
 import Validation from "./validation";
+import { getFormDataObject } from "../formRules/util";
 
-const Form = (formSelector, onSubmit, language) => {
-    const ERROR = require(`./i18n/error/${language}.json`)
+const Form = (formSelector, onSubmit, {language = 'en-US', i18n = {}, customValidation = {}, RULES}) => {
+    const ERROR = i18n(language).error;
     const errorsActives = {};
     let state = {
         onceError: false
@@ -41,7 +40,7 @@ const Form = (formSelector, onSubmit, language) => {
         if((input.dataset.rule && input.required) || (!input.required && input.value != '')) {
             const INPUT_RULE = input.dataset.rule.split('--')[0];
             const RULE_MODIFIER = input.dataset.rule.split('--').length > 1 ? input.dataset.rule.split('--')[1] : ''
-            const validate = Validation(input.value, RULES[INPUT_RULE], RULE_MODIFIER);
+            const validate = Validation(input.value, RULES[INPUT_RULE], RULE_MODIFIER, customValidation);
             const {isValid, error} = validate.validate();
             input.classList[isValid ? 'remove' : 'add']('rule--invalid');
 
@@ -66,7 +65,7 @@ const Form = (formSelector, onSubmit, language) => {
     }
 
     function initMask() {
-        Mask().addInputMask();
+        Mask(RULES).addInputMask();
     }
 
     function initValidation() {
@@ -91,6 +90,22 @@ const Form = (formSelector, onSubmit, language) => {
                 };
             }
             onSubmit(data);
+        });
+        formElement.addEventListener('reset', function() {
+            const errorElements = document.querySelectorAll('.rule__error');
+            const inputInvalidElements = document.querySelectorAll('.rule--invalid');
+            if(errorElements && errorElements.length > 0) {
+                errorElements.forEach((errorElement) => {
+                    errorElement.classList.remove('invalid');
+                    errorElement.innerText = '';
+                });
+            }
+            if(inputInvalidElements && inputInvalidElements.length > 0) {
+                inputInvalidElements.forEach((errorElement) => {
+                    errorElement.classList.remove('rule--invalid');
+                });
+            }
+            state.onceError = false;
         });
     }
 
