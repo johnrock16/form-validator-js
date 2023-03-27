@@ -1,6 +1,3 @@
-import ERROR_EN_US from './i18n/error/en-US.json';
-import ERROR_PT_BR from './i18n/error/pt-BR.json';
-
 export const CUSTOM_RULE =  {
     name:{
         validate: ['hasText'],
@@ -73,11 +70,5 @@ export const CUSTOM_RULE =  {
         error: {
             cpf: 'cpf.cpf',
         },
-    },
-    i18n: {
-        error: {
-            "en-US": ERROR_EN_US,
-            "pt-BR": ERROR_PT_BR
-        }
     }
 };

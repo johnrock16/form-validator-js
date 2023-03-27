@@ -2,9 +2,8 @@ import Mask from "./mask";
 import Validation from "./validation";
 import { getFormDataObject } from "../formRules/util";
 
-const Form = (formSelector, onSubmit, {language = 'en-US', customValidation = {}, RULES}) => {
-    const ERROR = RULES.i18n.error[language];
-    delete RULES.i18n;
+const Form = (formSelector, onSubmit, {language = 'en-US', i18n = {}, customValidation = {}, RULES}) => {
+    const ERROR = i18n(language).error;
     const errorsActives = {};
     let state = {
         onceError: false
