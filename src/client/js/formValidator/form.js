@@ -1,11 +1,10 @@
 import Mask from "./mask";
-import RULES from "./rules";
-import { getFormDataObject } from "./util";
 import Validation from "./validation";
+import { getFormDataObject } from "../formRules/util";
 
-const Form = (formSelector, onSubmit, {language = 'en-US', customValidation = {}, customRule = {}}) => {
-    const ERROR = require(`./i18n/error/${language}.json`);
-    const RULES_VALIDATION = {...RULES, ...customRule};
+const Form = (formSelector, onSubmit, {language = 'en-US', customValidation = {}, RULES}) => {
+    const ERROR = RULES.i18n.error[language];
+    delete RULES.i18n;
     const errorsActives = {};
     let state = {
         onceError: false
@@ -42,7 +41,7 @@ const Form = (formSelector, onSubmit, {language = 'en-US', customValidation = {}
         if((input.dataset.rule && input.required) || (!input.required && input.value != '')) {
             const INPUT_RULE = input.dataset.rule.split('--')[0];
             const RULE_MODIFIER = input.dataset.rule.split('--').length > 1 ? input.dataset.rule.split('--')[1] : ''
-            const validate = Validation(input.value, RULES_VALIDATION[INPUT_RULE], RULE_MODIFIER, customValidation);
+            const validate = Validation(input.value, RULES[INPUT_RULE], RULE_MODIFIER, customValidation);
             const {isValid, error} = validate.validate();
             input.classList[isValid ? 'remove' : 'add']('rule--invalid');
 
@@ -56,7 +55,7 @@ const Form = (formSelector, onSubmit, {language = 'en-US', customValidation = {}
         if(input.dataset.rule) {
             const INPUT_RULE = input.dataset.rule.split('--')[0];
             const RULE_MODIFIER = input.dataset.rule.split('--').length > 1 ? input.dataset.rule.split('--')[1] : ''
-            const RULE = RULE_MODIFIER ? RULES_VALIDATION[INPUT_RULE].modifier[RULE_MODIFIER] : RULES_VALIDATION[INPUT_RULE];
+            const RULE = RULE_MODIFIER ? RULES[INPUT_RULE].modifier[RULE_MODIFIER] : RULES[INPUT_RULE];
 
             if(RULE.attributes) {
                 Object.keys(RULE.attributes).forEach((attribute) => {
@@ -67,7 +66,7 @@ const Form = (formSelector, onSubmit, {language = 'en-US', customValidation = {}
     }
 
     function initMask() {
-        Mask(RULES_VALIDATION).addInputMask();
+        Mask(RULES).addInputMask();
     }
 
     function initValidation() {

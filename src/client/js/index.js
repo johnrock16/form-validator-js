@@ -5,5 +5,5 @@ import '../styles/main.scss'
 
 const form = Form('form', (submitData) => {
     console.log('submited', submitData)
-}, {language: 'en-US', customValidation: CustomValidation, customRule: CUSTOM_RULE});
+}, {language: 'en-US', customValidation: CustomValidation, RULES: CUSTOM_RULE});
 form.init();
