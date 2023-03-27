@@ -91,6 +91,22 @@ const Form = (formSelector, onSubmit, {language = 'en-US', i18n = {}, customVali
             }
             onSubmit(data);
         });
+        formElement.addEventListener('reset', function() {
+            const errorElements = document.querySelectorAll('.rule__error');
+            const inputInvalidElements = document.querySelectorAll('.rule--invalid');
+            if(errorElements && errorElements.length > 0) {
+                errorElements.forEach((errorElement) => {
+                    errorElement.classList.remove('invalid');
+                    errorElement.innerText = '';
+                });
+            }
+            if(inputInvalidElements && inputInvalidElements.length > 0) {
+                inputInvalidElements.forEach((errorElement) => {
+                    errorElement.classList.remove('rule--invalid');
+                });
+            }
+            state.onceError = false;
+        });
     }
 
     function init(initOptions = { methods: ['initValidation', 'initMask']}) {
