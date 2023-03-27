@@ -7,48 +7,50 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 </head>
 <body>
-    <form>
-        <div>
-            <label>name</label>
-            <input name="name" type="text" data-rule="name"/>
-            <span class="rule__error"></span>
-        </div>
-        <div>
-            <label>email</label>
-            <input name="email" type="email" data-rule="email"/>
-            <span class="rule__error"></span>
-        </div>
-        <div>
-            <label>phone</label>
-            <input class="mask-phone" name="phone" type="phone" data-rule="phone"/>
-            <span class="rule__error"></span>
-        </div>
-        <div>
-            <label>DD</label>
-            <input class="mask-dd" name="dd" type="number" data-rule="dd"/>
-            <span class="rule__error"></span>
-        </div>
-        <div>
-            <label>some data</label>
-            <input name="somedata" type="text"/>
-        </div>
-        <div>
-            <label>date</label>
-            <input name="date" type="date" data-rule="date"/>
-            <span class="rule__error"></span>
-        </div>
-        <div>
-            <label>birthdate</label>
-            <input name="birthdate" type="date" data-rule="date--age"/>
-            <span class="rule__error"></span>
-        </div>
-        <div>
-            <label>cpf</label>
-            <input class="mask-cpf" name="cpf" type="text" data-rule="cpf"/>
-            <span class="rule__error"></span>
-        </div>
-        <button type="submit">Submit</button>
-    </form>
+    <div class="container">
+        <form class="form">
+            <div class="form__field col-6">
+                <label class="required">name</label>
+                <input name="name" type="text" data-rule="name" required/>
+                <span class="rule__error"></span>
+            </div>
+            <div class="form__field col-6">
+                <label>email</label>
+                <input name="email" type="email" data-rule="email"/>
+                <span class="rule__error"></span>
+            </div>
+            <div class="form__field col-6">
+                <label class="required">phone</label>
+                <input class="mask-phone" name="phone" type="phone" data-rule="phone" required/>
+                <span class="rule__error"></span>
+            </div>
+            <div class="form__field col-6">
+                <label class="required">DD</label>
+                <input class="mask-dd" name="dd" type="number" data-rule="dd" required/>
+                <span class="rule__error"></span>
+            </div>
+            <div class="form__field col-12">
+                <label>some data</label>
+                <input name="somedata" type="text"/>
+            </div>
+            <div class="form__field col-3">
+                <label class="required">date</label>
+                <input name="date" type="date" data-rule="date" required/>
+                <span class="rule__error"></span>
+            </div>
+            <div class="form__field col-3">
+                <label class="required">birthdate</label>
+                <input name="birthdate" type="date" data-rule="date--age" required/>
+                <span class="rule__error"></span>
+            </div>
+            <div class="form__field col-6">
+                <label class="required">CPF</label>
+                <input class="mask-cpf" name="cpf" type="text" data-rule="cpf" required/>
+                <span class="rule__error"></span>
+            </div>
+            <button class="button" type="submit">Submit</button>
+        </form>
+    </div>
     <!-- <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {

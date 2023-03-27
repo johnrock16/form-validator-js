@@ -51,6 +51,20 @@ const Form = (formSelector, onSubmit, language) => {
         return true;
     }
 
+    function addAttributes(input) {
+        if(input.dataset.rule) {
+            const INPUT_RULE = input.dataset.rule.split('--')[0];
+            const RULE_MODIFIER = input.dataset.rule.split('--').length > 1 ? input.dataset.rule.split('--')[1] : ''
+            const RULE = RULE_MODIFIER ? RULES[INPUT_RULE].modifier[RULE_MODIFIER] : RULES[INPUT_RULE];
+
+            if(RULE.attributes) {
+                Object.keys(RULE.attributes).forEach((attribute) => {
+                    input[attribute] = RULE.attributes[attribute];
+                });
+            }
+        }
+    }
+
     function initMask() {
         Mask().addInputMask();
     }
@@ -64,6 +78,7 @@ const Form = (formSelector, onSubmit, language) => {
                     inputValidation(input);
                 }
             });
+            addAttributes(input);
         })
         formElement.addEventListener('submit', function(e) {
             e.preventDefault();
