@@ -38,7 +38,7 @@ const Form = (formSelector, onSubmit, language) => {
     }
 
     function inputValidation(input) {
-        if(input.dataset.rule) {
+        if((input.dataset.rule && input.required) || (!input.required && input.value != '')) {
             const INPUT_RULE = input.dataset.rule.split('--')[0];
             const RULE_MODIFIER = input.dataset.rule.split('--').length > 1 ? input.dataset.rule.split('--')[1] : ''
             const validate = Validation(input.value, RULES[INPUT_RULE], RULE_MODIFIER);

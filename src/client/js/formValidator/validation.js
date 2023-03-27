@@ -18,7 +18,8 @@ const Validation = (value, rule, modifier = null) => {
     }
 
     function validateAge(minAge, maxAge) {
-        return calculateAge(value, minAge, maxAge) >= minAge;
+        const age = calculateAge(value, minAge, maxAge)
+        return age >= minAge && age <= maxAge;
     }
 
     function validateRules(rule) {
