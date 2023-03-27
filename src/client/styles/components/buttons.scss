@@ -1,0 +1,33 @@
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 40px;
+    padding: $gutter;
+    @include fontSize(1.4);
+    font-weight: $bold;
+    color: $black;
+    background-color: $secondary;
+    border: 1px solid $black;
+    cursor: pointer;
+
+    &--secondary {
+        border: none;
+        color: $black;
+        background-color: $secondary;
+    }
+
+    &--transparent {
+        padding: 0;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    &--icon {
+        @include fontSize(2.4);
+        background: none;
+        border: none;
+    }
+}

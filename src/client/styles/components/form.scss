@@ -1,0 +1,40 @@
+.form {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: $gutter * 2;
+    padding: $gutter * 2 $gutter * 4 $gutter * 4 $gutter * 4;
+    margin-top: $gutter * 4;
+    border: 1px solid black;
+    border-radius: 12px;
+
+    button {
+        @include fontSize(2.0);
+    }
+
+    &__field {
+        display: flex;
+        flex-direction: column;
+        gap: $gutter;
+        @include fontSize(1.6);
+        text-transform: capitalize;
+
+        input {
+            max-width: calc(100% - $gutter * 4);
+        }
+    }
+}
+
+.rule {
+    &--invalid {
+        border: 1px solid red;
+    }
+
+    &__error {
+        display: none;
+
+        &.invalid {
+            display: block;
+            color: red;
+        }
+    }
+}

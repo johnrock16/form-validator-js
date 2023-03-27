@@ -1,0 +1,63 @@
+.img-fluid {
+    width: 100%;
+    height: auto;
+}
+
+.img-round {
+    border-radius: 50%;
+}
+
+.cropImage {
+    overflow: hidden;
+}
+
+.listNoDots {
+    list-style: none;
+}
+
+
+html {
+    font-size: 10px;
+}
+
+body {
+    margin: 0;
+    font-family: $fontFamily;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+    width: 100%;
+    max-width: 620px;
+    margin: 0 auto;
+}
+
+h1, h2, h3, h4, h5, p {
+    margin: 0;
+}
+
+.border {
+    &--none {
+        border: none;
+    }
+    &--top {
+        border-top: 1px solid $borderPrimary;
+    }
+    &--bottom {
+        border-bottom: 1px solid $borderPrimary;
+    }
+}
+
+.select {
+    &--text {
+        padding: 0;
+        width: min-content;
+    }
+}
+
+@media ($aboveDesktopSmall) {
+    .container {
+        max-width: $desktopSmallSize;
+    }
+}

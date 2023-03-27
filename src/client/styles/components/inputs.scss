@@ -1,0 +1,22 @@
+input, select, textarea {
+    padding: $gutter;
+    @include fontSize(1.6);
+    background-color: $white;
+    border: 1px solid $black;
+    border-radius: $borderRadius;
+}
+
+textarea {
+    min-height: 200px;
+}
+
+.input {
+    &--transparent {
+        background-color: transparent;
+        border: 1px solid $white;
+    }
+}
+
+label.required::after {
+    content: " *";
+}

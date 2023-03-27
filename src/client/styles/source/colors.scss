@@ -1,0 +1,26 @@
+$black: black;
+$white: white;
+
+
+$blackOpacity: #00000077;
+
+$secondary: #EFEFEF;
+
+$primaryText: #262626;
+$secondaryText: #8E8E8E;
+$secondaryTextContrast: #545454;
+$blueText: #0095f6;
+
+$borderPrimary: #DBDBDB;
+
+$theme-colors:(
+    "black": $black,
+    "white": $white,
+    "blackOpacity": $blackOpacity,
+    "secondary": $secondary,
+    "primaryText": $primaryText,
+    "secondaryText": $secondaryText,
+    "secondaryTextContrast": $secondaryTextContrast,
+    "blueText": $blueText,
+    "borderPrimary": $borderPrimary
+)

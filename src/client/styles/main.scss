@@ -1,14 +1,7 @@
-.rule {
-    &--invalid {
-        border: 1px solid red;
-    }
+@import "./source/core.scss";
+@import "./source/utils.scss";
 
-    &__error {
-        display: none;
-
-        &.invalid {
-            display: block;
-            color: red;
-        }
-    }
-}
+@import "./components/buttons.scss";
+@import "./components/inputs.scss";
+@import "./components/grid.scss";
+@import "./components/form.scss";
